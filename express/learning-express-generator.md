@@ -1,36 +1,46 @@
 # Learning express-generator
 
-##### 安裝 express-generator scaffolding 工具
+## 安裝 express-generator scaffolding 工具
 
 ```bash
 npm install -g express-generator
 ```
 
-##### 建立專案
+## 建立專案
 
 ```bash
 express <專案名稱>
 ```
 
-##### 切換到專案資料夾安裝 npm 套件
+## 切換到專案資料夾安裝 npm 套件
 
 ```bash
 cd <專案名稱> && npm install
 ```
 
-##### 開啟伺服器，當你登入 `http://localhost:3000/` 會出現 log
+## 開啟伺服器
 
 ```bash
 ./bin/www
 ```
 
-##### 開啟 debug log，filter 吃正規表達式
-	
-	DEBUG=<filter>
-	
-例如
+> 當你登入 `http://localhost:3000/` 會出現 log
 
-`*`什麼都印
+##### 開啟 debug log
+
+```bash	
+DEBUG=<filter> ./bin/www
+```
+
+> filter 的格式可以有 wildcard (*)
+	
+例如：
+
+```
+DEBUG=* ./bin/www
+``` 
+
+什麼 debug log 都會印
 
     express:router:route new / +0ms
     express:router:layer new / +2ms
@@ -70,6 +80,10 @@ cd <專案名稱> && npm install
     express:router:layer new / +1ms
     <專案名稱>:server Listening on port 3000 +4ms
 
-`<專案名稱>:*`  就會只印出專案 log
+```
+DEBUG=<專案名稱>:* ./bin/www
+```  
 
-<專案名稱>:server Listening on port 3000 +0ms
+就會只印出專案 debug log
+
+    <專案名稱>:server Listening on port 3000 +0ms
