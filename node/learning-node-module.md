@@ -55,7 +55,7 @@ function Car() {
 
 ### exports
 
-這個變數是整個環節做難理解的一部分，其實 `exports` 就是一個指向 `module.exports` 的參考。也就是說用 exports 可以直接在 module 下面綁上屬性或方法
+這個變數是整個環節最難理解的一部分，其實 `exports` 就是一個指向 `module.exports` 的參考。也就是說用 exports 可以直接在 module 下面綁上屬性或方法
 
 下面這個範例達到跟上面輸出物件的範例會有一樣效果：
 
@@ -75,7 +75,7 @@ exports.myMethod = function() {
 exports = function() {};
 ```
 
-這裡需要一點指標跟參考的概念，如果 exports 直接被指定了其他的值，他就失去了對 module.exports 的參考，所以 exports 就失去了意義，也無法繼續把屬性跟方法把到模組上。
+這裡需要一點指標跟參考的概念，如果 exports 直接被指定了其他的值，他就失去了對 module.exports 的參考，所以 exports 就失去了意義，也無法繼續把屬性跟方法綁到模組上。
 
 下面是官方文件的一個假想實作：
 
