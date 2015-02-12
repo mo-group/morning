@@ -1,6 +1,6 @@
 # Learning node module
 
-JavaScript 的 module 直到 ES6 才支援，所以 JavaScript 非原生的模組非常盛行，其中比較有名的是 `AMD` 跟 `CommonJS`。node 比身使用的就是 `CommonJS` 的模組規範。
+JavaScript 的 module 直到 ES6 才支援，所以 JavaScript 非原生的模組非常盛行，其中比較有名的是 `AMD` 跟 `CommonJS`。node 本身使用的就是 `CommonJS` 的模組規範。
 
 ## 輸出模組
 
@@ -103,7 +103,6 @@ var exports = module.exports;
 ```javascript
 exports = function() {};
 ```
-
 
 ## 載入模組
 
