@@ -26,7 +26,7 @@ cd <專案名稱> && npm install
 
 > 當你登入 `http://localhost:3000/` 會出現 log
 
-##### 開啟 debug log
+## 開啟 debug log
 
 ```bash	
 DEBUG=<filter> ./bin/www
