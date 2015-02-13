@@ -6,6 +6,7 @@ https://github.com/rauchg/chat-example
 
 ## 紀錄 users 清單
 
+```javascript
 var users = [];
 
 io.on('connection', function(socket){
@@ -31,5 +32,6 @@ io.on('connection', function(socket){
     io.emit('chat message', user.name + ': 已經離開了');
   });
 });
+```
 
 > 警告：目前沒有處理 username 重複的狀況，用 unique id 會是比較好的做法
