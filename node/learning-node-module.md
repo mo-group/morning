@@ -129,7 +129,27 @@ require
 
 ### 第三方模組
 
-使用 npm 安裝模組後，node_modules 來面就會出現相關的目錄
+使用 npm 安裝模組後，`node_modules` 裡面就會出現相關的目錄：
+
+```bash
+npm install express
+```
+
+
+
+### 模組載入順序
+
+#### 檔名順序
+
+相關目錄
+
+1. .js
+2. .json
+3. .node
+
+#### 目錄順序
+
+
 
 ### 快取
 
