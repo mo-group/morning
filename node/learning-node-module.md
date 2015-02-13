@@ -106,9 +106,31 @@ exports = function() {};
 
 ## 載入模組
 
+載入模組的方式是使用 require 方法。
+
+```javascript
+var http = require('http')
+var myFn = require('./myFunction');
+```
+
 ### 原生模組
+
+node 提供許多 C++ 撰寫的模組，例如：檔案系統 - `fs`、HTTP 協定 - `http`、加密 - `crypto`，等等。
+
+只要直接用關鍵字去載入即可：
+
+```javascript
+var http = require('http');
+var fs = require('fs');
+```
 
 ### 相對路徑
 require
 
+### 第三方模組
+
+使用 npm 安裝模組後，node_modules 來面就會出現相關的目錄
+
 ### 快取
+
+模組只要載入一次，就會被快取。之後就會快很多。
