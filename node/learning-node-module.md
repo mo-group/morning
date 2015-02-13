@@ -104,6 +104,30 @@ var exports = module.exports;
 exports = function() {};
 ```
 
+### 常見寫法
+
+```javascript
+exports = module.exports = createApplication;
+
+function createApplication() {
+  //...省略
+}
+
+exports.application = application;
+exports.request = req;
+exports.response = res;
+```
+
+以上程式碼節錄自 `express` 專案，使用 function 當作回傳值，並把數個值綁定到屬性下面。
+
+所以可以直接當 function 使用，也可以使用模組下面的屬性：
+
+```
+var express = require('express');
+var app = express();
+var Router = express.Router;
+```
+
 ## 載入模組
 
 載入模組的方式是使用 require 方法。
@@ -125,32 +149,52 @@ var fs = require('fs');
 ```
 
 ### 相對路徑
-require
+
+使用 `./` 或是 `../` 開頭的，都會直接被當作是相對路徑，例如：
+
+```javascript
+var app = require('./app');
+var utils = require('../lib/utils');
+```
+
+如此可以直接拿到該檔案輸出的值。
 
 ### 第三方模組
 
-使用 npm 安裝模組後，`node_modules` 裡面就會出現相關的目錄：
+使用 npm 安裝模組後，`node_modules` 目錄裡面就會出現相關的目錄：
 
 ```bash
 npm install express
 ```
 
+接著就可以直接在程式碼裡面載入：
 
+```javascript
+var express = require('express');
+```
+
+> 第三方模組也像原生模組一樣，是使用關鍵字，所以 npm 上面的模組名稱不能重複註冊。
 
 ### 模組載入順序
 
 #### 檔名順序
 
-相關目錄
+在使用相對路徑載入模組時，會依照下列順序尋找：
 
 1. .js
 2. .json
 3. .node
 
+找不到 `.js` 時會尋找 `.json`，最後才是 `.node` 檔。
+
 #### 目錄順序
 
-
+載入第三方模組時，會先在該目錄下搜尋 `node_modules` 目錄裡有沒有那個模組的目錄，如果沒有就來到上層目錄繼續尋找 `node_modules`，直到找到 global 安裝的資料夾都還找不到，則 throw exception。
 
 ### 快取
 
 模組只要載入一次，就會被快取。之後就會快很多。
+
+### npm
+
+node 模組跟 npm 密不可分，之後再寫一篇介紹 npm。
