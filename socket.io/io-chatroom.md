@@ -6,6 +6,30 @@ https://github.com/rauchg/chat-example
 
 ## 紀錄 users 清單
 
+#### 用 prompt 取得使用者名稱
+
+在 `index.html`：
+
+```html
+<script>
+  var socket = io();
+  $('form').submit(function(){
+    socket.emit('chat message', $('#m').val());
+    $('#m').val('');
+    return false;
+  });
+  socket.on('chat message', function(msg){
+    $('#messages').append($('<li>').text(msg));
+  });
+  var username = prompt('請輸入姓名');
+  socket.emit('register user', username);
+</script>
+```
+
+#### 新增事件來新增移除使用者
+
+在 `index.js`：
+
 ```javascript
 var users = [];
 
