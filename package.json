@@ -18,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/mo-group/morning/issues"
   },
-  "homepage": "https://github.com/mo-group/morning"
+  "homepage": "https://github.com/mo-group/morning",
+  "dependencies": {
+    "glob": "^4.3.5",
+    "marked": "^0.3.3",
+    "replacestream": "^2.0.0",
+    "through2": "^0.6.3"
+  }
 }
