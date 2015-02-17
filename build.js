@@ -5,6 +5,19 @@ var glob = require('glob');
 var through = require('through2');
 var replacestream = require('replacestream');
 var marked = require('marked');
+var highlight = require('highlight.js');
+
+
+var options = {
+  gfm: true,
+  tables: true,
+  breaks: true,
+  highlight: function (code) {
+    return highlight.highlightAuto(code).value;
+  }
+};
+
+marked.setOptions(options);
 
 var indexContent = [];
 
