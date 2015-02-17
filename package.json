@@ -1,0 +1,22 @@
+{
+  "name": "morning",
+  "version": "0.1.0",
+  "description": "study",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mo-group/morning.git"
+  },
+  "keywords": [
+    "study"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mo-group/morning/issues"
+  },
+  "homepage": "https://github.com/mo-group/morning"
+}
