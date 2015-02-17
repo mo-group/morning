@@ -28,17 +28,17 @@ cd <專案名稱> && npm install
 
 ## 開啟 debug log
 
-```bash	
+```bash
 DEBUG=<filter> ./bin/www
 ```
 
 > filter 的格式可以有 wildcard (*)
-	
+
 例如：
 
 ```
 DEBUG=* ./bin/www
-``` 
+```
 
 什麼 debug log 都會印
 
@@ -82,7 +82,7 @@ DEBUG=* ./bin/www
 
 ```
 DEBUG=<專案名稱>:* ./bin/www
-```  
+```
 
 就會只印出專案 debug log
 
