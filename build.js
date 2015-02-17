@@ -26,6 +26,7 @@ fs.createReadStream('README.md')
 
   fs.createReadStream('./template.html')
     .pipe(replacestream('{{md}}', md))
+    .pipe(replacestream('{{path}}', '.'))
     .pipe(fs.createWriteStream('index.html'));
 });
 
@@ -53,6 +54,7 @@ glob('**/*.md', function (er, files) {
 
         fs.createReadStream('./template.html')
           .pipe(replacestream('{{md}}', md))
+          .pipe(replacestream('{{path}}', '..'))
           .pipe(fs.createWriteStream(file.replace('.md', '.html')));
       });
   });
