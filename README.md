@@ -10,3 +10,7 @@
 
 - [socket.io](./socket.io/index.md)
   + [Socket.io chatroom](./socket.io/io-chatroom.md)
+
+- [D3.js](./d3/index.md)
+  + [D3 Introduction](./d3/d3-introduction.md)
+  + [D3 Infographic](./d3/d3-infographic.md)
