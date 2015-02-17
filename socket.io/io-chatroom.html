@@ -34,45 +34,45 @@
 <h2 id="-users-">紀錄 users 清單</h2>
 <h4 id="-prompt-">用 prompt 取得使用者名稱</h4>
 <p>在 <code>index.html</code>：</p>
-<pre><code class="lang-html">&lt;script&gt;
-  var socket = io();
-  $(&#39;form&#39;).submit(function(){
-    socket.emit(&#39;chat message&#39;, $(&#39;#m&#39;).val());
-    $(&#39;#m&#39;).val(&#39;&#39;);
-    return false;
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">var</span> socket = io();
+  $(<span class="hljs-string">'form'</span>).submit(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+    socket.emit(<span class="hljs-string">'chat message'</span>, $(<span class="hljs-string">'#m'</span>).val());
+    $(<span class="hljs-string">'#m'</span>).val(<span class="hljs-string">''</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   });
-  socket.on(&#39;chat message&#39;, function(msg){
-    $(&#39;#messages&#39;).append($(&#39;&lt;li&gt;&#39;).text(msg));
+  socket.on(<span class="hljs-string">'chat message'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(msg)</span></span>{
+    $(<span class="hljs-string">'#messages'</span>).append($(<span class="hljs-string">'&lt;li&gt;'</span>).text(msg));
   });
-  var username = prompt(&#39;請輸入姓名&#39;);
-  socket.emit(&#39;register user&#39;, username);
-&lt;/script&gt;
+  <span class="hljs-keyword">var</span> username = prompt(<span class="hljs-string">'請輸入姓名'</span>);
+  socket.emit(<span class="hljs-string">'register user'</span>, username);
+</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 </code></pre>
 <h4 id="-">新增事件來新增移除使用者</h4>
 <p>在 <code>index.js</code>：</p>
-<pre><code class="lang-javascript">var users = [];
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> users = [];
 
-io.on(&#39;connection&#39;, function(socket){
-  var user = {
-    name: &#39;&#39;
+io.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(socket)</span></span>{
+  <span class="hljs-keyword">var</span> user = {
+    name: <span class="hljs-string">''</span>
   };
-  socket.on(&#39;chat message&#39;, function(msg){
-    io.emit(&#39;chat message&#39;, user.name + &#39;: &#39; + msg);
+  socket.on(<span class="hljs-string">'chat message'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(msg)</span></span>{
+    io.emit(<span class="hljs-string">'chat message'</span>, user.name + <span class="hljs-string">': '</span> + msg);
   });
 
-  socket.on(&#39;register user&#39;, function(username) {
+  socket.on(<span class="hljs-string">'register user'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(username)</span> </span>{
     user.name = username;
     users.push(username);
   });
 
-  socket.on(&#39;disconnect&#39;, function() {
-    var index = users.indexOf(user.name);
+  socket.on(<span class="hljs-string">'disconnect'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">var</span> index = users.indexOf(user.name);
 
-    if (index &gt; -1) {
-        users.splice(index, 1);
+    <span class="hljs-keyword">if</span> (index &gt; -<span class="hljs-number">1</span>) {
+        users.splice(index, <span class="hljs-number">1</span>);
     }
 
-    io.emit(&#39;chat message&#39;, user.name + &#39;: 已經離開了&#39;);
+    io.emit(<span class="hljs-string">'chat message'</span>, user.name + <span class="hljs-string">': 已經離開了'</span>);
   });
 });
 </code></pre>

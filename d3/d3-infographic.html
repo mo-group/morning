@@ -33,16 +33,16 @@
 <p>接下來我們要讓資料跟畫面建立起關係：</p>
 <h4 id="-data">.data</h4>
 <p>這個方法可以把資料跟 DOM 繫結在一起：</p>
-<pre><code class="lang-javascript">targets.data([ 1, 2, 3, 4, 5 ])
+<pre><code class="lang-javascript"><span class="hljs-title">targets</span>.<span class="hljs-typedef"><span class="hljs-keyword">data</span><span class="hljs-container">([ 1, 2, 3, 4, 5 ])</span></span>
 </code></pre>
 <p>不過只是這樣還是完全沒利用到資料，還需要往下繼續用到匿名函式參數或甚至 <code>.enter</code>。</p>
 <h4 id="-enter">.enter</h4>
 <p>這個方法是整個 D3 最難理解的部分之一，但因為資料個數通常不一定而且會改變，這個進場的方法還是至關重要。</p>
-<pre><code class="lang-javascript">d3.select(&#39;body&#39;).selectAll(&#39;div&#39;)
-    .data([ 1, 2, 3, 4, 5 ])
-  .enter().append(&#39;div&#39;)
-    .text(&#39;內容資訊&#39;)
-    // ...
+<pre><code class="lang-javascript">d3.<span class="hljs-function"><span class="hljs-title">select</span><span class="hljs-params">(<span class="hljs-string">'body'</span>)</span></span>.<span class="hljs-function"><span class="hljs-title">selectAll</span><span class="hljs-params">(<span class="hljs-string">'div'</span>)</span></span>
+    .<span class="hljs-function"><span class="hljs-title">data</span><span class="hljs-params">([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span> ])</span></span>
+  .<span class="hljs-function"><span class="hljs-title">enter</span><span class="hljs-params">()</span></span>.<span class="hljs-function"><span class="hljs-title">append</span><span class="hljs-params">(<span class="hljs-string">'div'</span>)</span></span>
+    .<span class="hljs-function"><span class="hljs-title">text</span><span class="hljs-params">(<span class="hljs-string">'內容資訊'</span>)</span></span>
+    <span class="hljs-comment">// ...</span>
 </code></pre>
 <p>乍看之下是無法簡單理解，<code>.enter</code> 方法會比較目前選擇器選到的元素個數，然後利用建立暫存元素 (placeholder element) 的方式把它補足到跟 data 個數一樣。</p>
 <p>舉例來說，如果我先前 <code>.selectAll(&#39;div&#39;)</code> 一個都沒選到，那 <code>.enter</code> 會幫我建立五個 <code>div</code> 並加入內容資訊。如果 <code>.selectAll(&#39;div&#39;)</code> 已經選到了三個，那 <code>.enter</code> 只會建立二個 <code>div</code>，前面三個就不會有內容資訊。這樣看來 <code>.enter</code> 負責處理的就是資料進場的方式。</p>
@@ -50,28 +50,28 @@
 <p>這邊的縮排引用官方文件上讓 <code>.enter</code> 往左移的排版，有利於思考正在操作的東西是什麼</p>
 </blockquote>
 <p><code>.enter</code> 的相反也有 <code>.exit</code> 負責處理比資料多的元素，多出來的可選擇用 <code>.remove</code>，或甚至加上動畫讓它消滅。</p>
-<pre><code class="lang-javascript">targets.exit()
-  .remove()
+<pre><code class="lang-javascript">targets.<span class="hljs-function"><span class="hljs-title">exit</span><span class="hljs-params">()</span></span>
+  .<span class="hljs-function"><span class="hljs-title">remove</span><span class="hljs-params">()</span></span>
 </code></pre>
 <h4 id="-">讓匿名函式作為參數</h4>
 <p>用匿名函式作為設值類方法的參數堪稱 <code>Data-Driven</code> 的靈魂，作為參數的函式會接收 data 跟 index 兩個參數：</p>
-<pre><code class="lang-javascript">function(data, index) { ... }
+<pre><code class="lang-javascript"><span class="hljs-keyword">function</span>(data, index) { <span class="hljs-keyword">...</span> }
 </code></pre>
 <p>也就是你可以利用先前用 <code>.data</code> 放進來的每一筆資料跟他的順序，來佈置你的畫面。</p>
-<pre><code class="lang-javascript">targets.data([ 1, 2, 3, 4, 5 ])
+<pre><code class="lang-javascript"><span class="hljs-title">targets</span>.<span class="hljs-typedef"><span class="hljs-keyword">data</span><span class="hljs-container">([ 1, 2, 3, 4, 5 ])</span></span>
        .enter()
-       .style(&#39;opacity&#39;, function(data, index) {
-         return data / 5;
-       })
+       .style('opacity', function(<span class="hljs-typedef"><span class="hljs-keyword">data</span>, index) <span class="hljs-container">{
+         <span class="hljs-title">return</span> <span class="hljs-title">data</span> / 5;
+       }</span>)</span>
 </code></pre>
 <p>這樣就可以對 5 個元素設定 0.2、0.4、0.6、0.8、1.0 的透明度</p>
 <p>一次設定 SVG line 的 x1、y1、x2、y2：</p>
-<pre><code class="lang-javascript">d3.select(&#39;line&#39;)
+<pre><code class="lang-javascript">d3.<span class="hljs-built_in">select</span>(<span class="hljs-string">'line'</span>)
     .attr({
-      &#39;x1&#39;: function(d, i) { return 0; },
-      &#39;y1&#39;: function(d, i) { return 0; },
-      &#39;x2&#39;: function(d, i) { return i * WIDTH; },
-      &#39;y2&#39;: function(d, i) { return i * HEIGHT; }
+      <span class="hljs-string">'x1'</span>: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span></span> { <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; },
+      <span class="hljs-string">'y1'</span>: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span></span> { <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; },
+      <span class="hljs-string">'x2'</span>: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span></span> { <span class="hljs-keyword">return</span> i * WIDTH; },
+      <span class="hljs-string">'y2'</span>: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span></span> { <span class="hljs-keyword">return</span> i * HEIGHT; }
     });
 </code></pre>
 <blockquote>
@@ -79,64 +79,64 @@
 </blockquote>
 <h4 id="-each">.each</h4>
 <p>類似 jQuery 的 <code>.each</code>，不過他丟進來的是一筆 data，不是 DOM element，而且順序不同，必須小心混淆。而 D3 則可以用 <code>this</code> 取到現在的 DOM element。</p>
-<pre><code class="lang-javascript">// D3
-targets.each(function(data, index) {
-  // ..this 是現在的 DOM element
-  d3.select(this)
-      .attr(&#39;name1&#39;, &#39;value1&#39;)
-        .attr(&#39;name2&#39;, &#39;value2&#39;)
+<pre><code class="lang-javascript"><span class="hljs-comment">// D3</span>
+targets.<span class="hljs-keyword">each</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data, index)</span> </span>{
+  <span class="hljs-comment">// ..this 是現在的 DOM element</span>
+  d3.select(<span class="hljs-keyword">this</span>)
+      .attr(<span class="hljs-string">'name1'</span>, <span class="hljs-string">'value1'</span>)
+        .attr(<span class="hljs-string">'name2'</span>, <span class="hljs-string">'value2'</span>)
 
-   // .. 做任何你想做的
+   <span class="hljs-comment">// .. 做任何你想做的</span>
 })
 </code></pre>
-<pre><code class="lang-javascript">// jQuery
-targets.each(function(index, element) {
-  // ..傳進來的是 DOM element 而且順序不同
+<pre><code class="lang-javascript"><span class="hljs-comment">// jQuery</span>
+targets.<span class="hljs-keyword">each</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(index, element)</span> </span>{
+  <span class="hljs-comment">// ..傳進來的是 DOM element 而且順序不同</span>
 })
 </code></pre>
 <h3 id="-transition">過場轉移 Transition</h3>
 <p>如果畫面的改變是瞬間完成的，會令人感覺到缺乏順暢與互動感。在這方面 D3 有 <code>.transition</code> 這個方法來讓畫面的改變變的平滑。只要再調整樣式前加上 <code>.transition()</code>即可：</p>
-<pre><code class="lang-javascript">d3.select(&#39;body&#39;).transition()
-    .style(&#39;background-color&#39;, &#39;black&#39;)
+<pre><code class="lang-javascript">d3.<span class="hljs-function"><span class="hljs-title">select</span><span class="hljs-params">(<span class="hljs-string">'body'</span>)</span></span>.<span class="hljs-function"><span class="hljs-title">transition</span><span class="hljs-params">()</span></span>
+    .<span class="hljs-function"><span class="hljs-title">style</span><span class="hljs-params">(<span class="hljs-string">'background-color'</span>, <span class="hljs-string">'black'</span>)</span></span>
 </code></pre>
 <p>這樣背景的顏色就會漸漸的從現在的顏色變為黑色。</p>
 <h4 id="-duration">.duration</h4>
 <p>設定轉場的時間間隔，設定的時間越久動畫的速度則越慢，單位為毫秒：</p>
-<pre><code class="lang-javascript">d3.selectAll(&#39;circle&#39;).transition()
-    .duration(750)
-    .attr(&#39;r&#39;, function(d) { return Math.sqrt(d * scale); })
+<pre><code class="lang-javascript">d3.selectAll(<span class="hljs-string">'circle'</span>).transition()
+    .duration(<span class="hljs-number">750</span>)
+    .attr(<span class="hljs-string">'r'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.sqrt(d * scale); })
 </code></pre>
 <h4 id="-delay">.delay</h4>
 <p>延遲動畫開始的時間，可以很簡單配合匿名函式做出有層次的漸變：</p>
-<pre><code class="lang-javascript">d3.selectAll(&#39;circle&#39;).transition()
-    .duration(750)
-    .delay(function(d, i) { return i * 10; })
-    .attr(&#39;r&#39;, function(d) { return Math.sqrt(d * scale); })
+<pre><code class="lang-javascript">d3.selectAll(<span class="hljs-string">'circle'</span>).transition()
+    .duration(<span class="hljs-number">750</span>)
+    .delay(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, i)</span> </span>{ <span class="hljs-keyword">return</span> i * <span class="hljs-number">10</span>; })
+    .attr(<span class="hljs-string">'r'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.sqrt(d * scale); })
 </code></pre>
 <p>每一個圓形會因為順序，各自開始的時間有 10 毫秒的間隔。</p>
 <h3 id="-event">事件 Event</h3>
 <p>過場轉移跟事件就是在 Web 上做資訊圖表比靜態的圖表優異的地方，根據使用者滑鼠的移動，網頁可以給予使用者他想關注的資訊並進行互動。例如：對想吸引目光的物件做變色、跳出更詳細的內容等等。</p>
 <h4 id="-">事件監聽器</h4>
 <p>在 D3，要監聽事件一樣是使用常見的 <code>.on</code> 方法，</p>
-<pre><code class="lang-javascript">tagets.on(&#39;click&#39;, function() {
-  // ...
+<pre><code class="lang-javascript">tagets.on(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">function</span>() {
+  // <span class="hljs-keyword">...</span>
 })
 </code></pre>
 <p>要針對事件做 DOM 的操作，一樣可以沿用之前的方法利用匿名函式的參數。舉例來說，要讓滑鼠經過的元素變色的話：</p>
 <pre><code class="lang-javascript">// 假設 data 長這樣
 // [
 //   {
-//      color : &#39;#ffebbb&#39;
-//      ...
+//      color : <span class="hljs-string">'#ffebbb'</span>
+//      <span class="hljs-keyword">...</span>
 //   },
-//   ...
+//   <span class="hljs-keyword">...</span>
 // ]
 
-tagets.on(&#39;mouseover&#39;, function(d, i) {
+tagets.on(<span class="hljs-string">'mouseover'</span>, <span class="hljs-keyword">function</span>(d, i) {
   d3.select(this)
       .style({
-        &#39;color&#39;: d.color,
-        &#39;background-color&#39;: &#39;black&#39;
+        <span class="hljs-string">'color'</span>: d.color,
+        <span class="hljs-string">'background-color'</span>: <span class="hljs-string">'black'</span>
       })
 })
 </code></pre>
@@ -144,12 +144,12 @@ tagets.on(&#39;mouseover&#39;, function(d, i) {
 <h4 id="-">抓滑鼠相對位置</h4>
 <p>雖然不是事件的一部分，但常在這用到所以一便提及，用 <code>d3.mouse(node)</code> 可以抓到滑鼠跟某個文件節點的相對位置。</p>
 <p>node 則可用 <code>.node</code> 方法拿到：</p>
-<pre><code class="lang-javascript">d3.mouse(target.node())
+<pre><code class="lang-javascript">d3.<span class="hljs-function"><span class="hljs-title">mouse</span><span class="hljs-params">(target.node()</span></span>)
 </code></pre>
 <p>有了相對位置又可以加入邏輯進行畫面的調整了。</p>
 <h3 id="-layout">版型 Layout</h3>
 <p>D3 有一些內建的版型，他的特點是會有一個資料轉換函式，例如圓餅圖有 <code>d3.layout.pie</code>，把資料經過函式轉換後再用 <code>.data</code> 繫結上去，就會多了一些其他的資料讓你可以畫出對應的版型</p>
-<pre><code class="lang-javascript">.data(d3.layout.pie(dataset))
+<pre><code class="lang-javascript">.<span class="hljs-typedef"><span class="hljs-keyword">data</span><span class="hljs-container">(<span class="hljs-title">d3</span>.<span class="hljs-title">layout</span>.<span class="hljs-title">pie</span>(<span class="hljs-title">dataset</span>)</span>)</span>
 </code></pre>
 <p>接著匿名函式的 data 參數就會多了一些資料。剩餘如何畫出圓餅需要一些 SVG path 的相關知識，這邊就不詳述。</p>
 <p>比較有特色的版型還有重力圖 (Force Layout) 等等。</p>

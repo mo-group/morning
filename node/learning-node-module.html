@@ -36,68 +36,68 @@
 <p>module 除了有 <code>id</code>、<code>filename</code>、<code>loaded</code>、<code>parent</code>、<code>children</code> 等等屬性，初學最重要的是他的 <code>exports</code> 屬性，<code>module.exports</code> 的值就會是模組輸出的東西。</p>
 <p>下面是一些基本的用法：</p>
 <h4 id="-">輸出數字</h4>
-<pre><code class="lang-javascript">module.exports = 1;
+<pre><code class="lang-javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-number">1</span>;
 </code></pre>
 <h4 id="-">輸出字串</h4>
-<pre><code class="lang-javascript">module.exports = &#39;a module&#39;;
+<pre><code class="lang-javascript"><span class="hljs-keyword">module</span>.exports = <span class="hljs-attribute">'a</span> <span class="hljs-keyword">module</span>';
 </code></pre>
 <h4 id="-">輸出函數</h4>
-<pre><code class="lang-javascript">module.exports = function() {
+<pre><code class="lang-javascript">module.<span class="hljs-keyword">exports</span> = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> <span class="hljs-comment">{
 
-};
+}</span>;</span>
 </code></pre>
 <h4 id="-">輸出物件</h4>
-<pre><code class="lang-javascript">module.exports = {
-  a: &#39;test&#39;,
-  myMethod: function() {
+<pre><code class="lang-javascript"><span class="hljs-built_in">module</span>.exports = {
+  a: <span class="hljs-string">'test'</span>,
+  myMethod: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
 
   }
 };
 </code></pre>
 <h4 id="-">輸出建構式</h4>
-<pre><code class="lang-javascript">module.exports = Car;
+<pre><code class="lang-javascript"><span class="hljs-built_in">module</span>.exports = Car;
 
-function Car() {
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Car</span><span class="hljs-params">()</span> </span>{
 
 }
 </code></pre>
 <h3 id="exports">exports</h3>
 <p>這個變數是整個環節最難理解的一部分，其實 <code>exports</code> 就是一個指向 <code>module.exports</code> 的參考。也就是說用 exports 可以直接在 module 下面綁上屬性或方法</p>
 <p>下面這個範例達到跟上面輸出物件的範例會有一樣效果：</p>
-<pre><code class="lang-javascript">exports.a = &#39;test&#39;;
+<pre><code class="lang-javascript"><span class="hljs-keyword">exports</span>.a = <span class="hljs-string">'test'</span>;
 
-exports.myMethod = function() {
+<span class="hljs-keyword">exports</span>.myMethod = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> <span class="hljs-comment">{
 
-};
+}</span>;</span>
 </code></pre>
 <h4 id="-assign-">不要直接 assign 值</h4>
 <p>千萬不要把任何值直接 assign 到 exports：</p>
-<pre><code class="lang-javascript">exports = function() {};
+<pre><code class="lang-javascript"><span class="hljs-keyword">exports</span> = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> <span class="hljs-comment">{}</span>;</span>
 </code></pre>
 <p>這裡需要一點指標跟參考的概念，如果 exports 直接被指定了其他的值，他就失去了對 module.exports 的參考，所以 exports 就失去了意義，也無法繼續把屬性跟方法綁到模組上。</p>
 <p>下面是官方文件的一個假想實作：</p>
-<pre><code class="lang-javascript">function require(...) {
-  // ...
-  function (module, exports) {
+<pre><code class="lang-javascript"><span class="hljs-keyword">function</span> <span class="hljs-keyword">require</span>(<span class="hljs-keyword">...</span>) {
+  // <span class="hljs-keyword">...</span>
+  <span class="hljs-keyword">function</span> (module, exports) {
     // Your module code here
     exports = some_func;        // re-assigns exports, exports is no longer
                                 // a shortcut, and nothing is exported.
-    module.exports = some_func; // makes your module export 0
+    module.exports = some_func; // makes your module export <span class="hljs-number">0</span>
   } (module, module.exports);
-  return module;
+  <span class="hljs-keyword">return</span> module;
 }
 </code></pre>
 <p>可以想像是在你的模組程式碼前跑了這樣一行：</p>
-<pre><code class="lang-javascript">var exports = module.exports;
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> <span class="hljs-keyword">exports</span> = module.<span class="hljs-keyword">exports</span>;
 </code></pre>
 <p>再往下就會知道 module.exports 的參考不見了：</p>
-<pre><code class="lang-javascript">exports = function() {};
+<pre><code class="lang-javascript"><span class="hljs-keyword">exports</span> = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> <span class="hljs-comment">{}</span>;</span>
 </code></pre>
 <h3 id="-">常見寫法</h3>
 <pre><code class="lang-javascript">exports = module.exports = createApplication;
 
-function createApplication() {
-  //...省略
+<span class="hljs-keyword">function</span> createApplication() {
+  //<span class="hljs-keyword">...</span>省略
 }
 
 exports.application = application;
@@ -106,32 +106,32 @@ exports.response = res;
 </code></pre>
 <p>以上程式碼節錄自 <code>express</code> 專案，使用 function 當作回傳值，並把數個值綁定到屬性下面。</p>
 <p>所以可以直接當 function 使用，也可以使用模組下面的屬性：</p>
-<pre><code>var express = require(&#39;express&#39;);
-var app = express();
-var Router = express.Router;
+<pre><code><span class="hljs-reserved">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+<span class="hljs-reserved">var</span> app = express();
+<span class="hljs-reserved">var</span> Router = express.Router;
 </code></pre><h2 id="-">載入模組</h2>
 <p>載入模組的方式是使用 require 方法。</p>
-<pre><code class="lang-javascript">var http = require(&#39;http&#39;)
-var myFn = require(&#39;./myFunction&#39;);
+<pre><code class="lang-javascript"><span class="hljs-reserved">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>)
+<span class="hljs-reserved">var</span> myFn = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./myFunction'</span>);
 </code></pre>
 <h3 id="-">原生模組</h3>
 <p>node 提供許多 C++ 撰寫的模組，例如：檔案系統 - <code>fs</code>、HTTP 協定 - <code>http</code>、加密 - <code>crypto</code>，等等。</p>
 <p>只要直接用關鍵字去載入即可：</p>
-<pre><code class="lang-javascript">var http = require(&#39;http&#39;);
-var fs = require(&#39;fs&#39;);
+<pre><code class="lang-javascript"><span class="hljs-reserved">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>);
+<span class="hljs-reserved">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
 </code></pre>
 <h3 id="-">相對路徑</h3>
 <p>使用 <code>./</code> 或是 <code>../</code> 開頭的，都會直接被當作是相對路徑，例如：</p>
-<pre><code class="lang-javascript">var app = require(&#39;./app&#39;);
-var utils = require(&#39;../lib/utils&#39;);
+<pre><code class="lang-javascript"><span class="hljs-reserved">var</span> app = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./app'</span>);
+<span class="hljs-reserved">var</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../lib/utils'</span>);
 </code></pre>
 <p>如此可以直接拿到該檔案輸出的值。</p>
 <h3 id="-">第三方模組</h3>
 <p>使用 npm 安裝模組後，<code>node_modules</code> 目錄裡面就會出現相關的目錄：</p>
-<pre><code class="lang-bash">npm install express
+<pre><code class="lang-bash">npm <span class="hljs-keyword">install</span> express
 </code></pre>
 <p>接著就可以直接在程式碼裡面載入：</p>
-<pre><code class="lang-javascript">var express = require(&#39;express&#39;);
+<pre><code class="lang-javascript"><span class="hljs-reserved">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
 </code></pre>
 <blockquote>
 <p>第三方模組也像原生模組一樣，是使用關鍵字，所以 npm 上面的模組名稱不能重複註冊。</p>

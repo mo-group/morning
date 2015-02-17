@@ -39,47 +39,47 @@
 <h3 id="-namespace">命名空間 Namespace</h3>
 <p>D3 裡面所有的功能都包裝在 d3 命名空間裡面，例如：<code>d3.select</code>、<code>d3.scale.linear</code>、<code>d3.event</code>、<code>d3.rgb</code>、<code>d3.csv</code> 等等，詳細的內容可以參照 <a href="https://github.com/mbostock/d3/wiki/API-Reference">API 清單</a>。</p>
 <p>這邊值得一提的是，有別於一般常用的 amd、commonjs 或 es6 的 JavaScript 模組，D3 是採用作者自行開發的 <a href="https://github.com/mbostock/smash">mbostock/smash</a> 建構工具來編譯模組的匯入。</p>
-<pre><code class="lang-javascript">import &quot;bar&quot;;
+<pre><code class="lang-javascript"><span class="hljs-preprocessor"><span class="hljs-keyword">import</span> "bar";</span>
 
-function foo() {
-  return &quot;foo&quot; + bar();
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-string">"foo"</span> + bar();
 }
 </code></pre>
 <p>整個專案絕大多數的部分皆為一個方法放一個檔案，要查看原始碼非常方便，若對 <code>d3.color</code> 有疑問可直接查找 <code>d3/src/color/color.js</code>、對 <code>d3.rgb</code> 有疑問則是找 <code>d3/src/color/rgb.js</code> 即可。</p>
 <h3 id="-selector">選擇器 Selector</h3>
 <p>操作 DOM 是前端 CSS 和 JavaScript 開發者的第一堂課，也造就了 jQuery 的大紅大紫，D3 包裝了 <a href="http://www.w3.org/TR/selectors-api/">W3C Selectors API</a> 的 <code>querySelector</code> 和 <code>querySelectorAll</code> 兩個方法，做成了自己的 <code>d3.select</code> 和 <code>d3.selectAll</code>，而相關的操作都跟 jQuery 非常接近，也讓熟悉的開發者有快速學會的契機。</p>
 <p>這邊簡單的利用一個 <code>targets</code> 變數暫存選取結果，有利於後面的範例：</p>
-<pre><code class="lang-javascript">var targets = d3.selectAll(&#39;div&#39;);
+<pre><code class="lang-javascript"><span class="hljs-title">var</span> targets = d3.<span class="hljs-built_in">select</span>All(<span class="hljs-string">'div'</span>);
 </code></pre>
 <p>下面是幾個常用方法：</p>
 <h4 id="-attr">.attr</h4>
 <p>可以設定 DOM 的 attributes，例如設定 class：</p>
-<pre><code class="lang-javascript">targets.attr(&#39;class&#39;, &#39;chart&#39;)
+<pre><code class="lang-javascript">targets.<span class="hljs-function"><span class="hljs-title">attr</span><span class="hljs-params">(<span class="hljs-string">'class'</span>, <span class="hljs-string">'chart'</span>)</span></span>
 </code></pre>
 <p>也可以傳入物件一次設定數個屬性</p>
-<pre><code class="lang-javascript">d3.select(&#39;line&#39;)
+<pre><code class="lang-javascript">d3.<span class="hljs-keyword">select</span>(<span class="hljs-string">'line'</span>)
      .attr({
-       &#39;x1&#39;: 0,
-       &#39;y1&#39;: 0,
-       &#39;x2&#39;: 100,
-       &#39;y2&#39;: 100
+       <span class="hljs-string">'x1'</span>: <span class="hljs-number">0</span>,
+       <span class="hljs-string">'y1'</span>: <span class="hljs-number">0</span>,
+       <span class="hljs-string">'x2'</span>: <span class="hljs-number">100</span>,
+       <span class="hljs-string">'y2'</span>: <span class="hljs-number">100</span>
     });
 </code></pre>
 <h4 id="-style">.style</h4>
 <p>對圖像的函式庫來說，樣式就是吃飯傢伙，有了 <code>.style</code> 這個方法可以操作 css 後，設計師的思考就可以無邊無際的發展來完成創作，例如調整透明度：</p>
-<pre><code class="lang-javascript">targets.style(&#39;opacity&#39;, 0.75)
+<pre><code class="lang-javascript">targets.<span class="hljs-function"><span class="hljs-title">style</span><span class="hljs-params">(<span class="hljs-string">'opacity'</span>, <span class="hljs-number">0.75</span>)</span></span>
 </code></pre>
 <h4 id="-text">.text</h4>
 <p>做 Tooltip 或是 Lable 等等會常用到的一個方法，跟 jQuery 一樣可以塞字串進去：</p>
-<pre><code class="lang-javascript">targets.text(&#39;這是詳細的資訊&#39;)
+<pre><code class="lang-javascript">targets.<span class="hljs-function"><span class="hljs-title">text</span><span class="hljs-params">(<span class="hljs-string">'這是詳細的資訊'</span>)</span></span>
 </code></pre>
 <h4 id="-append">.append</h4>
 <p>跟 jQuery 的 <code>.append</code> 一樣可以把東西插入到元素裡面的最尾端位置：</p>
-<pre><code class="lang-javascript">targets.append(&#39;p&#39;)
+<pre><code class="lang-javascript">targets.<span class="hljs-function"><span class="hljs-title">append</span><span class="hljs-params">(<span class="hljs-string">'p'</span>)</span></span>
 </code></pre>
 <h4 id="-">繼續往下選？</h4>
 <p>D3 一樣有類似 jQuery 的 <code>.find</code> 的方法，支援從選取結果繼續選取，只要重複的使用 <code>.select</code> 和 <code>.selectAll</code> 這兩個方法就可以了：</p>
-<pre><code class="lang-javascript">d3.select(&#39;body&#39;).selectAll(&#39;div&#39;).selectAll(&#39;.row&#39;)
+<pre><code class="lang-javascript">d3.<span class="hljs-function"><span class="hljs-title">select</span><span class="hljs-params">(<span class="hljs-string">'body'</span>)</span></span>.<span class="hljs-function"><span class="hljs-title">selectAll</span><span class="hljs-params">(<span class="hljs-string">'div'</span>)</span></span>.<span class="hljs-function"><span class="hljs-title">selectAll</span><span class="hljs-params">(<span class="hljs-string">'.row'</span>)</span></span>
 </code></pre>
 
         </section>

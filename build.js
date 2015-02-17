@@ -17,7 +17,8 @@ var options = {
   }
 };
 
-marked.setOption(options);
+marked.setOptions(options);
+
 
 var indexContent = [];
 

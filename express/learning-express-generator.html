@@ -30,69 +30,69 @@
         <section id="main-content">
           <h1 id="learning-express-generator">Learning express-generator</h1>
 <h2 id="-express-generator-scaffolding-">安裝 express-generator scaffolding 工具</h2>
-<pre><code class="lang-bash">npm install -g express-generator
+<pre><code class="lang-bash">npm <span class="hljs-keyword">install</span> -g express-generator
 </code></pre>
 <h2 id="-">建立專案</h2>
-<pre><code class="lang-bash">express &lt;專案名稱&gt;
+<pre><code class="lang-bash">express <span class="hljs-tag">&lt;<span class="hljs-title">專案名稱</span>&gt;</span>
 </code></pre>
 <h2 id="-npm-">切換到專案資料夾安裝 npm 套件</h2>
-<pre><code class="lang-bash">cd &lt;專案名稱&gt; &amp;&amp; npm install
+<pre><code class="lang-bash">cd <span class="hljs-tag">&lt;<span class="hljs-title">專案名稱</span>&gt;</span> &amp;&amp; npm install
 </code></pre>
 <h2 id="-">開啟伺服器</h2>
-<pre><code class="lang-bash">./bin/www
+<pre><code class="lang-bash">.<span class="hljs-regexp">/bin/</span>www
 </code></pre>
 <blockquote>
 <p>當你登入 <code>http://localhost:3000/</code> 會出現 log</p>
 </blockquote>
 <h2 id="-debug-log">開啟 debug log</h2>
-<pre><code class="lang-bash">DEBUG=&lt;filter&gt; ./bin/www
+<pre><code class="lang-bash">DEBUG=<span class="hljs-tag">&lt;<span class="hljs-title">filter</span>&gt;</span> ./bin/www
 </code></pre>
 <blockquote>
 <p>filter 的格式可以有 wildcard (*)</p>
 </blockquote>
 <p>例如：</p>
-<pre><code>DEBUG=* ./bin/www
+<pre><code><span class="hljs-attribute">DEBUG</span>=<span class="hljs-string">* ./bin/www</span>
 </code></pre><p>什麼 debug log 都會印</p>
-<pre><code>express:router:route new / +0ms
-express:router:layer new / +2ms
-express:router:route get / +1ms
-express:router:layer new / +0ms
-express:router:route new / +1ms
-express:router:layer new / +0ms
-express:router:route get / +0ms
-express:router:layer new / +0ms
-express:application compile etag weak +2ms
-express:application compile query parser extended +0ms
-express:application compile trust proxy false +0ms
-express:application booting in development mode +0ms
-express:router use / query +2ms
-express:router:layer new / +0ms
-express:router use / expressInit +0ms
-express:router:layer new / +0ms
-express:router use / logger +0ms
-express:router:layer new / +1ms
-express:router use / jsonParser +18ms
-express:router:layer new / +0ms
-express:router use / urlencodedParser +3ms
-express:router:layer new / +0ms
-express:router use / cookieParser +0ms
-express:router:layer new / +0ms
-express:router use / serveStatic +1ms
-express:router:layer new / +0ms
-express:router use / router +0ms
-express:router:layer new / +0ms
-express:router use /users router +0ms
-express:router:layer new /users +0ms
-express:router use / &lt;anonymous&gt; +0ms
-express:router:layer new / +0ms
-express:router use / &lt;anonymous&gt; +0ms
-express:router:layer new / +0ms
-express:router use / &lt;anonymous&gt; +0ms
-express:router:layer new / +1ms
-&lt;專案名稱&gt;:server Listening on port 3000 +4ms
-</code></pre><pre><code>DEBUG=&lt;專案名稱&gt;:* ./bin/www
+<pre><code><span class="hljs-string">express:</span><span class="hljs-string">router:</span>route <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">2</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>route get / +<span class="hljs-number">1</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>route <span class="hljs-keyword">new</span> / +<span class="hljs-number">1</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>route get / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>application compile etag weak +<span class="hljs-number">2</span>ms
+<span class="hljs-string">express:</span>application compile query parser extended +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>application compile trust proxy <span class="hljs-literal">false</span> +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>application booting <span class="hljs-keyword">in</span> development mode +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use / query +<span class="hljs-number">2</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use / expressInit +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use / logger +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">1</span>ms
+<span class="hljs-string">express:</span>router use / jsonParser +<span class="hljs-number">18</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use / urlencodedParser +<span class="hljs-number">3</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use / cookieParser +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use / serveStatic +<span class="hljs-number">1</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use / router +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use /users router +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> /users +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use / &lt;anonymous&gt; +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use / &lt;anonymous&gt; +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span>router use / &lt;anonymous&gt; +<span class="hljs-number">0</span>ms
+<span class="hljs-string">express:</span><span class="hljs-string">router:</span>layer <span class="hljs-keyword">new</span> / +<span class="hljs-number">1</span>ms
+&lt;專案名稱&gt;:server Listening on port <span class="hljs-number">3000</span> +<span class="hljs-number">4</span>ms
+</code></pre><pre><code>DEBUG=<span class="hljs-variable">&lt;專案名稱&gt;</span>:<span class="hljs-keyword">*</span> ./bin/www
 </code></pre><p>就會只印出專案 debug log</p>
-<pre><code>&lt;專案名稱&gt;:server Listening on port 3000 +0ms
+<pre><code>&lt;專案名稱&gt;:server Listening <span class="hljs-function_start"><span class="hljs-keyword">on</span></span> port <span class="hljs-number">3000</span> +<span class="hljs-number">0</span>ms
 </code></pre>
         </section>
 

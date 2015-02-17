@@ -31,10 +31,10 @@
           <h1 id="learning-middleware">Learning middleware</h1>
 <p>express 使用一種叫做 <code>middleware</code> 的擴充介面，來把請求跟回應的相關處理跟應用程式的核心邏輯分開，類似的手法在 Ruby、Go 等其他程式語言也能看到。</p>
 <p>express 的 middleware 是 function，通常接受 <code>req</code>、<code>res</code>、<code>next</code> 三個參數：</p>
-<pre><code class="lang-js">function(req, res, next) { //... }
+<pre><code class="lang-js"><span class="hljs-keyword">function</span>(req, res, <span class="hljs-keyword">next</span>) { //<span class="hljs-keyword">...</span> }
 </code></pre>
 <p>要使用它們只要簡單的使用 <code>app.use</code>：</p>
-<pre><code class="lang-js">app.use(function(req, res, next) { //... });
+<pre><code class="lang-js">app.use(<span class="hljs-keyword">function</span>(req, res, <span class="hljs-keyword">next</span>) { //<span class="hljs-keyword">...</span> });
 </code></pre>
 <h2 id="-">尾端控制</h2>
 <h4 id="next">next</h4>
@@ -43,9 +43,9 @@
 <p>不要接收 next 參數或是不要呼叫 next：</p>
 <h2 id="-">選擇路徑</h2>
 <h2 id="-">錯誤處理</h2>
-<pre><code class="lang-js">function(err, req, res, next) { //... }
+<pre><code class="lang-js"><span class="hljs-keyword">function</span>(err, req, res, <span class="hljs-keyword">next</span>) { //<span class="hljs-keyword">...</span> }
 </code></pre>
-<pre><code class="lang-js">next(err);
+<pre><code class="lang-js"><span class="hljs-keyword">next</span>(<span class="hljs-built_in">err</span>);
 </code></pre>
 
         </section>
