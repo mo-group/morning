@@ -4,6 +4,7 @@
 
 - [node](./node/index.md)
   + [Learning node module](./node/learning-node-module.md)
+  + [Environment variables](./environment-variables.md)
 
 - [express](./express/index.md)
   + [Learning express generator](./express/learning-express-generator.md)
