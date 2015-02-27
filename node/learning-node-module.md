@@ -14,19 +14,19 @@ module 除了有 `id`、`filename`、`loaded`、`parent`、`children` 等等屬�
 
 #### 輸出數字
 
-```javascript
+```js
 module.exports = 1;
 ```
 
 #### 輸出字串
 
-```javascript
+```js
 module.exports = 'a module';
 ```
 
 #### 輸出函數
 
-```javascript
+```js
 module.exports = function() {
 
 };
@@ -34,7 +34,7 @@ module.exports = function() {
 
 #### 輸出物件
 
-```javascript
+```js
 module.exports = {
   a: 'test',
   myMethod: function() {
@@ -45,7 +45,7 @@ module.exports = {
 
 #### 輸出建構式
 
-```javascript
+```js
 module.exports = Car;
 
 function Car() {
@@ -59,7 +59,7 @@ function Car() {
 
 下面這個範例達到跟上面輸出物件的範例會有一樣效果：
 
-```javascript
+```js
 exports.a = 'test';
 
 exports.myMethod = function() {
@@ -71,7 +71,7 @@ exports.myMethod = function() {
 
 千萬不要把任何值直接 assign 到 exports：
 
-```javascript
+```js
 exports = function() {};
 ```
 
@@ -79,7 +79,7 @@ exports = function() {};
 
 下面是官方文件的一個假想實作：
 
-```javascript
+```js
 function require(...) {
   // ...
   function (module, exports) {
@@ -94,19 +94,19 @@ function require(...) {
 
 可以想像是在你的模組程式碼前跑了這樣一行：
 
-```javascript
+```js
 var exports = module.exports;
 ```
 
 再往下就會知道 module.exports 的參考不見了：
 
-```javascript
+```js
 exports = function() {};
 ```
 
 ### 常見寫法
 
-```javascript
+```js
 exports = module.exports = createApplication;
 
 function createApplication() {
@@ -122,17 +122,27 @@ exports.response = res;
 
 所以可以直接當 function 使用，也可以使用模組下面的屬性：
 
-```
+```js
 var express = require('express');
 var app = express();
 var Router = express.Router;
 ```
 
+以下則是來自 `co` 專案：
+
+```js
+module.exports = co['default'] = co.co = co;
+
+co.wrap = function (fn) { //... };
+```
+
+設定 `default` 跟 `co` 屬性都等於 module 自己，再接著添加方法。
+
 ## 載入模組
 
 載入模組的方式是使用 require 方法。
 
-```javascript
+```js
 var http = require('http')
 var myFn = require('./myFunction');
 ```
@@ -143,7 +153,7 @@ node 提供許多 C++ 撰寫的模組，例如：檔案系統 - `fs`、HTTP 協�
 
 只要直接用關鍵字去載入即可：
 
-```javascript
+```js
 var http = require('http');
 var fs = require('fs');
 ```
@@ -152,7 +162,7 @@ var fs = require('fs');
 
 使用 `./` 或是 `../` 開頭的，都會直接被當作是相對路徑，例如：
 
-```javascript
+```js
 var app = require('./app');
 var utils = require('../lib/utils');
 ```
@@ -169,7 +179,7 @@ npm install express
 
 接著就可以直接在程式碼裡面載入：
 
-```javascript
+```js
 var express = require('express');
 ```
 
